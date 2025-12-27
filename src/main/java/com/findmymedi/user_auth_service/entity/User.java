@@ -17,13 +17,10 @@ public class User {
     private Long id;
 
     @Column(nullable = false)
-    private String fullName;
+    private String wso2UserId;
 
     @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false)
-    private String passwordHash;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
