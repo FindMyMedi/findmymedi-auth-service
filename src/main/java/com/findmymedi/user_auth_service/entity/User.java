@@ -19,6 +19,9 @@ public class User {
     @Column(nullable = false,unique = true)
     private String wso2UserId;
 
+    @Column(nullable = false,unique = false)
+    private String fullName;
+
     @Column(nullable = false, unique = true)
     private String email;
 
