@@ -5,11 +5,29 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/user_db
     username: ${DB_USERNAME}
-    password: ${DB_PASSWORD}
+    password: ${DB_PASSWORD9}
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+
+  security:
+    oauth2:
+      client:
+        registration:
+          wso2:
+            client-id: ${WSO2_CLIENT_ID}
+            client-secret: ${WSO2_CLIENT_SECRET}
+            redirect-uri: "{baseUrl}/login/oauth2/code/wso2"
+            authorization-grant-type: authorization_code
+            scope: openid, profile, email
+        provider:
+          wso2:
+            authorization-uri: https://localhost:9443/oauth2/authorize
+            token-uri: https://localhost:9443/oauth2/token
+            user-info-uri: https://localhost:9443/oauth2/userinfo
+            jwk-set-uri: https://localhost:9443/oauth2/jwks
+            user-name-attribute: sub
 
 server:
   port: 0
