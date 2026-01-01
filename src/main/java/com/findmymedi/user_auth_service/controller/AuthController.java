@@ -2,6 +2,7 @@ package com.findmymedi.user_auth_service.controller;
 
 import com.findmymedi.user_auth_service.dto.UserRequestDto;
 import com.findmymedi.user_auth_service.service.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -36,5 +37,9 @@ public class AuthController {
         return ResponseEntity.ok("Login successful");
     }
 
+    @GetMapping("/login-failure")
+    public ResponseEntity<String> loginFailure() {
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
+    }
 
 }
