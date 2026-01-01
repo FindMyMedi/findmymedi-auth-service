@@ -5,11 +5,15 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/user_db
     username: ${DB_USERNAME}
-    password: ${DB_PASSWORD9}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
 
   security:
     oauth2:
@@ -30,9 +34,18 @@ spring:
             user-name-attribute: sub
 
 server:
-  port: 0
+  port: 8080
+
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://localhost:8761/eureka
 
 eureka:
   client:
-    service-url:
-      defaultZone: http://localhost:8761/eureka
+    enabled: false
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
