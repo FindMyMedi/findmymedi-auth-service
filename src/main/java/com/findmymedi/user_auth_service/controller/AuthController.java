@@ -1,6 +1,7 @@
 package com.findmymedi.user_auth_service.controller;
 
 import com.findmymedi.user_auth_service.dto.UserRequestDto;
+import com.findmymedi.user_auth_service.entity.RoleType;
 import com.findmymedi.user_auth_service.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.HashSet;
 
 @RestController
 @RequestMapping("/auth")
@@ -30,7 +30,7 @@ public class AuthController {
         userRequestDto.setWso2UserId(oidcUser.getSubject());
         userRequestDto.setEmail(oidcUser.getEmail());
         userRequestDto.setFullName(oidcUser.getFullName());
-        userRequestDto.setRoles(new HashSet<>(oidcUser.getClaimAsStringList("roles")));
+        userRequestDto.setRole(RoleType.USER);
 
         userService.createUser(userRequestDto);
 

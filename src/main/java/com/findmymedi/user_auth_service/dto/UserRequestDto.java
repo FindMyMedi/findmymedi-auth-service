@@ -1,10 +1,10 @@
 package com.findmymedi.user_auth_service.dto;
 
+import com.findmymedi.user_auth_service.entity.RoleType;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Data;
 
-import java.util.Set;
 
 @Data
 public class UserRequestDto {
@@ -18,5 +18,5 @@ public class UserRequestDto {
     @Email
     private String email;
 
-    private Set<String> roles;
+    private RoleType role;
 }

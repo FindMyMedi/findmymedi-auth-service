@@ -5,10 +5,7 @@ import com.findmymedi.user_auth_service.entity.*;
 import com.findmymedi.user_auth_service.repository.RoleRepository;
 import com.findmymedi.user_auth_service.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -22,7 +19,7 @@ public class UserService {
 
     public void createUser(UserRequestDto userRequestDto){
         if(userRepository.findByWso2UserId(userRequestDto.getWso2UserId()).isPresent()){
-            throw new RuntimeException("User already exists");
+            return;
         }
 
         User user = new User();
@@ -31,16 +28,13 @@ public class UserService {
         user.setEmail(userRequestDto.getEmail());
         user.setStatus(UserStatus.ACTIVE);
 
-        Set<UserRole> userRoles = new HashSet<>();
-        for (String roleName : userRequestDto.getRoles()) {
-            Role role = getOrCreateRole(roleName);
-            UserRole userRole = new UserRole();
-            userRole.setUser(user);
-            userRole.setRole(role);
-            userRoles.add(userRole);
-        }
+        Role role = getOrCreateRole(userRequestDto.getRole().name());
+        UserRole userRole = new UserRole();
+        userRole.setUser(user);
+        userRole.setRole(role);
 
-        user.setUserRoles(userRoles);
+        user.setUserRoles(Set.of(userRole));
+
         userRepository.save(user);
     }
 
