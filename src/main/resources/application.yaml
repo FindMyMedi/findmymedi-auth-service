@@ -36,6 +36,9 @@ spring:
 server:
   port: 8080
 
+app:
+  wso2:
+    signup-url: ${WSO2_SIGNUP_URL}
 #eureka:
 #  client:
 #    service-url:

@@ -3,6 +3,8 @@ package com.findmymedi.user_auth_service.controller;
 import com.findmymedi.user_auth_service.dto.UserRequestDto;
 import com.findmymedi.user_auth_service.entity.RoleType;
 import com.findmymedi.user_auth_service.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -11,15 +13,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.io.IOException;
+
 
 @RestController
 @RequestMapping("/auth")
 public class AuthController {
 
+    @Value("${app.wso2.signup-url}")
+    private String wso2SignupUrl;
+
     private final UserService userService;
 
     public AuthController(UserService userService){
         this.userService = userService;
+    }
+
+    @GetMapping("/register")
+    public void register(HttpServletResponse response) throws IOException {
+        response.sendRedirect(wso2SignupUrl);
     }
 
     @GetMapping("/login-success")
