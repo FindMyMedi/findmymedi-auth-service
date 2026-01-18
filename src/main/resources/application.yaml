@@ -24,7 +24,7 @@ spring:
             client-secret: ${WSO2_CLIENT_SECRET}
             redirect-uri: "{baseUrl}/login/oauth2/code/wso2"
             authorization-grant-type: authorization_code
-            scope: openid, profile, email
+            scope: openid, email
         provider:
           wso2:
             authorization-uri: https://localhost:9443/oauth2/authorize

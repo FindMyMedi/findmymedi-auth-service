@@ -37,14 +37,14 @@ public class AuthController {
     @GetMapping("/login-success")
     public ResponseEntity<String> loginSuccess(@AuthenticationPrincipal OidcUser oidcUser) {
 
-        UserRequestDto userRequestDto = new UserRequestDto();
-
-        userRequestDto.setWso2UserId(oidcUser.getSubject());
-        userRequestDto.setEmail(oidcUser.getEmail());
-        userRequestDto.setFullName(oidcUser.getFullName());
-        userRequestDto.setRole(RoleType.USER);
-
-        userService.createUser(userRequestDto);
+//        UserRequestDto userRequestDto = new UserRequestDto();
+//
+//        userRequestDto.setWso2UserId(oidcUser.getSubject());
+//        userRequestDto.setEmail(oidcUser.getEmail());
+//        userRequestDto.setFullName(oidcUser.getFullName());
+//        userRequestDto.setRole(RoleType.USER);
+//
+//        userService.createUser(userRequestDto);
 
         return ResponseEntity.ok("Login successful");
     }
