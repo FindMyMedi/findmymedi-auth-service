@@ -39,6 +39,8 @@ server:
 app:
   wso2:
     signup-url: ${WSO2_SIGNUP_URL}
+  frontend:
+    url: ${FRONTEND_URL}
 #eureka:
 #  client:
 #    service-url:
