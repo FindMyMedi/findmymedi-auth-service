@@ -42,3 +42,5 @@ Currently under active development as part of the FindMyMedi microservice ecosys
 ---
 
 📫 Contact: **findmymedi@gmail.com**
+
+Maintained by Bhashana Chamodya.
