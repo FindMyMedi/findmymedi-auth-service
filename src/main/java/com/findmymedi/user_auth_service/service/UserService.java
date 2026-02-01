@@ -48,7 +48,7 @@ public class UserService {
     }
 
     public CurrentUserResponseDto getCurrentUser(OidcUser oidcUser) {
-        return new CurrentUserResponseDto(oidcUser.getEmail(), oidcUser.getFullName());
+        return new CurrentUserResponseDto(oidcUser.getEmail());
     }
 
 }
