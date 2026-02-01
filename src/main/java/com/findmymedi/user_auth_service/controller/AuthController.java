@@ -1,5 +1,6 @@
 package com.findmymedi.user_auth_service.controller;
 
+import com.findmymedi.user_auth_service.dto.CurrentUserResponseDto;
 import com.findmymedi.user_auth_service.dto.UserRequestDto;
 import com.findmymedi.user_auth_service.entity.RoleType;
 import com.findmymedi.user_auth_service.service.UserService;
@@ -29,10 +30,10 @@ public class AuthController {
         this.userService = userService;
     }
 
-    @GetMapping("/register")
-    public void register(HttpServletResponse response) throws IOException {
-        response.sendRedirect(wso2SignupUrl);
-    }
+//    @GetMapping("/register")
+//    public void register(HttpServletResponse response) throws IOException {
+//        response.sendRedirect(wso2SignupUrl);
+//    }
 
     @GetMapping("/login-success")
     public ResponseEntity<String> loginSuccess(@AuthenticationPrincipal OidcUser oidcUser) {
@@ -52,6 +53,17 @@ public class AuthController {
     @GetMapping("/login-failure")
     public ResponseEntity<String> loginFailure() {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed");
+    }
+
+    @GetMapping("/current-user")
+    public ResponseEntity<?> currentUser(@AuthenticationPrincipal OidcUser oidcUser){
+        if (oidcUser == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Not logged in");
+        }
+
+        CurrentUserResponseDto currentUser = userService.getCurrentUser(oidcUser);
+
+        return ResponseEntity.ok(currentUser);
     }
 
 }

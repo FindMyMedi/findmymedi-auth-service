@@ -1,9 +1,11 @@
 package com.findmymedi.user_auth_service.service;
 
+import com.findmymedi.user_auth_service.dto.CurrentUserResponseDto;
 import com.findmymedi.user_auth_service.dto.UserRequestDto;
 import com.findmymedi.user_auth_service.entity.*;
 import com.findmymedi.user_auth_service.repository.RoleRepository;
 import com.findmymedi.user_auth_service.repository.UserRepository;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 import java.util.Set;
 
@@ -43,6 +45,10 @@ public class UserService {
 
         return roleRepository.findByRoleName(roleType)
                 .orElseGet(() -> roleRepository.save(new Role(null,roleType)));
+    }
+
+    public CurrentUserResponseDto getCurrentUser(OidcUser oidcUser) {
+        return new CurrentUserResponseDto(oidcUser.getEmail(), oidcUser.getFullName());
     }
 
 }
