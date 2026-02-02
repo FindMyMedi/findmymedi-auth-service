@@ -4,6 +4,7 @@ import com.findmymedi.user_auth_service.dto.CurrentUserResponseDto;
 import com.findmymedi.user_auth_service.dto.UserRequestDto;
 import com.findmymedi.user_auth_service.entity.RoleType;
 import com.findmymedi.user_auth_service.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -65,5 +66,13 @@ public class AuthController {
 
         return ResponseEntity.ok(currentUser);
     }
+
+    @GetMapping("/logout")
+    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.getSession().invalidate();
+
+        response.sendRedirect("https://localhost:9443/oidc/logout?post_logout_redirect_uri=http://localhost:4200/");
+    }
+
 
 }

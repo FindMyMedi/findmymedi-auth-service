@@ -62,7 +62,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
         config.setAllowedOrigins(List.of("http://localhost:4200"));
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        config.setAllowedHeaders(List.of("Authorization", "Content-Type"));
+        config.setAllowedHeaders(List.of("*"));
         config.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
@@ -73,7 +73,7 @@ public class SecurityConfig {
     @Bean
     public LogoutSuccessHandler oidcLogoutSuccessHandler() {
         var handler = new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
-        handler.setPostLogoutRedirectUri(frontUrl + "/" );
+        handler.setPostLogoutRedirectUri("http://localhost:4200/");
         return handler;
     }
 }

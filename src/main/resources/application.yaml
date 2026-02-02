@@ -27,11 +27,7 @@ spring:
             scope: openid, email
         provider:
           wso2:
-            authorization-uri: https://localhost:9443/oauth2/authorize
-            token-uri: https://localhost:9443/oauth2/token
-            user-info-uri: https://localhost:9443/oauth2/userinfo
-            jwk-set-uri: https://localhost:9443/oauth2/jwks
-            user-name-attribute: sub
+            issuer-uri: https://localhost:9443/oauth2/token
 
 server:
   port: 8080
