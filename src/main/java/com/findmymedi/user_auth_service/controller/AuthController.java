@@ -31,21 +31,14 @@ public class AuthController {
         this.userService = userService;
     }
 
-//    @GetMapping("/register")
-//    public void register(HttpServletResponse response) throws IOException {
-//        response.sendRedirect(wso2SignupUrl);
-//    }
-
     @GetMapping("/login-success")
     public ResponseEntity<String> loginSuccess(@AuthenticationPrincipal OidcUser oidcUser) {
 
 //        UserRequestDto userRequestDto = new UserRequestDto();
-//
 //        userRequestDto.setWso2UserId(oidcUser.getSubject());
 //        userRequestDto.setEmail(oidcUser.getEmail());
 //        userRequestDto.setFullName(oidcUser.getFullName());
 //        userRequestDto.setRole(RoleType.USER);
-//
 //        userService.createUser(userRequestDto);
 
         return ResponseEntity.ok("Login successful");
@@ -66,13 +59,4 @@ public class AuthController {
 
         return ResponseEntity.ok(currentUser);
     }
-
-    @GetMapping("/logout")
-    public void logout(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        request.getSession().invalidate();
-
-        response.sendRedirect("https://localhost:9443/oidc/logout?post_logout_redirect_uri=http://localhost:4200/");
-    }
-
-
 }
